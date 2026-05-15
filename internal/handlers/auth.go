@@ -23,7 +23,6 @@ func LoginHandler(c *gin.Context) {
 	var user models.Usuario
 	result := database.DB.Where("email = ?", input.Email).First(&user)
 
-	// REQUISITO: Erro genérico para não facilitar ataques
 	if result.Error != nil || !security.CheckPasswordHash(input.Password, user.PasswordHash) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuário ou senha inválidos"})
 		return

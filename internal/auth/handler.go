@@ -17,10 +17,8 @@ func LoginHandler(c *gin.Context) {
 	}
 
 	var user models.Usuario
-	// Busca o utilizador no SQL Server pelo e-mail
 	result := database.DB.Where("email = ?", input.Email).First(&user)
 
-	// REQUISITO: Comparação com Bcrypt e Erro Genérico
 	if result.Error != nil || !security.CheckPasswordHash(input.Password, user.PasswordHash) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Usuário ou senha inválidos"})
 		return

@@ -8,7 +8,7 @@ CREATE TABLE usuarios (
     nome_propriedade NVARCHAR(255),
     endereco_rural NVARCHAR(255),
 
-    CONSTRAINT CK_usuarios_tipo CHECK (tipo_conta IN ('produtor', 'cliente'))
+    CONSTRAINT CK_usuarios_tipo CHECK (tipo_conta IN ('P', 'C'))
 );
 
 CREATE TABLE safras (
