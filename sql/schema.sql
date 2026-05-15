@@ -5,6 +5,8 @@ CREATE TABLE usuarios (
     whatsapp NVARCHAR(50),
     password_hash NVARCHAR(255) NOT NULL,
     tipo_conta NVARCHAR(50) NOT NULL,
+    nome_propriedade NVARCHAR(255),
+    endereco_rural NVARCHAR(255),
 
     CONSTRAINT CK_usuarios_tipo CHECK (tipo_conta IN ('produtor', 'cliente'))
 );

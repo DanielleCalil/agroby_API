@@ -22,9 +22,12 @@ func CadastrarUsuario(dados models.UserCredentials) error {
 
 	// 3. Salvar no SQL Server via GORM
 	return database.DB.Create(&models.Usuario{
-		Nome:         dados.Nome,
-		Email:        dados.Email,
-		PasswordHash: hash,
-		TipoConta:    dados.Tipo,
+		Nome:            dados.Nome,
+		Email:           dados.Email,
+		PasswordHash:    hash,
+		Whatsapp:        dados.Whatsapp,
+		TipoConta:       dados.Tipo,
+		NomePropriedade: dados.NomePropriedade,
+		EnderecoRural:   dados.EnderecoRural,
 	}).Error
 }
