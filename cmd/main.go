@@ -1,6 +1,7 @@
 package main
 
 import (
+	"agroby_API/internal/auth"
 	"agroby_API/internal/database"
 	"agroby_API/internal/handlers"
 	"log"
@@ -25,6 +26,10 @@ func main() {
 		log.Println("Aviso: Arquivo .env não encontrado em .env ou ../.env. Usando variáveis de sistema.")
 	}
 
+	if err := auth.EnsureJWTConfigured(); err != nil {
+		log.Fatal(err)
+	}
+
 	database.Connect() // Inicializa o banco
 
 	r := gin.Default()
@@ -33,6 +38,7 @@ func main() {
 	// Configuração de rotas que seu React vai chamar
 	r.POST("/api/login", handlers.LoginHandler)
 	r.POST("/api/cadastro", handlers.RegisterHandler)
+	r.GET("/api/me", auth.AuthMiddleware(), handlers.MeHandler)
 
 	port := os.Getenv("APP_PORT")
 	if port == "" {

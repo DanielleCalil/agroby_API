@@ -4,6 +4,7 @@ go 1.25.6
 
 require (
 	github.com/gin-gonic/gin v1.12.0
+	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/joho/godotenv v1.5.1
 	golang.org/x/crypto v0.51.0
 	gorm.io/driver/sqlserver v1.6.3
