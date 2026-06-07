@@ -17,7 +17,7 @@ func Connect() {
 
 	dsn := os.Getenv("DATABASE_URL")
 	if dsn == "" {
-		log.Fatal("Variavel de ambiente DATABASE_URL nao definida.")
+		log.Fatal("Variável de ambiente DATABASE_URL não definida.")
 	}
 
 	DB, err = gorm.Open(sqlserver.Open(dsn), &gorm.Config{})

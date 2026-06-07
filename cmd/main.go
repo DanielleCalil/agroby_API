@@ -13,7 +13,6 @@ import (
 )
 
 func main() {
-	// Tenta carregar o .env em caminhos comuns de execucao (raiz e /cmd no debug).
 	envPaths := []string{".env", "../.env"}
 	loadedEnv := false
 	for _, envPath := range envPaths {
@@ -37,8 +36,11 @@ func main() {
 
 	// Configuração de rotas que seu React vai chamar
 	r.POST("/api/login", handlers.LoginHandler)
+	r.POST("/api/esqueci-senha", handlers.ForgotPasswordHandler)
+	r.POST("/api/resetar-senha", handlers.ResetPasswordHandler)
 	r.POST("/api/cadastro", handlers.RegisterHandler)
 	r.GET("/api/me", auth.AuthMiddleware(), handlers.MeHandler)
+	r.GET("/api/dashboard/resumo", auth.AuthMiddleware(), handlers.DashboardResumoHandler)
 
 	port := os.Getenv("APP_PORT")
 	if port == "" {
